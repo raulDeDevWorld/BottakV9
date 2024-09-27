@@ -99,7 +99,6 @@ function Home() {
                     'Direccion de billetera': transactionDB['billetera destinatario'],
                     'Red': transactionDB['red destinatario'],
                     'Divisa Receptor': transactionDB['divisa de receptor'],
-                    'ID de tracking': transactionDB.uuid
                 }
                 : {
                     Nombre: transactionDB['destinatario'],
@@ -110,7 +109,6 @@ function Home() {
                     'Cuenta Destinatario': transactionDB['cuenta destinatario'],
                     'Nombre Banco': transactionDB['nombre de banco'],
                     'Divisa Receptor': transactionDB['divisa de receptor'],
-                    'ID de tracking': transactionDB.uuid
                 },
             'DATOS DE TRANSACCION': {
                 Operacion: transactionDB['operacion'],
@@ -118,15 +116,19 @@ function Home() {
                 Comision: transactionDB['comision'],
                 ['Importe detinatario']: transactionDB['cambio'],
                 Estado: (transactionDB?.message && transactionDB.message === 'Verificado con Exito') ? 'Verificado' : 'En verificación',
-                Fecha: transactionDB['fecha']
+                Fecha: transactionDB['fecha'],
+                'ID de tracking': transactionDB.uuid
+
             },
             'CUENTA RECEPTORA BOTTAK': transactionDB['divisa de envio'] === 'USDT'
                 ? {
-                    'Billetera Bottak': transactionDB['billetera bottak']
+                    'Billetera Bottak': transactionDB['billetera bottak'],
+                    'Red Bottak': transactionDB['red bottak']
                 }
                 : {
-                    'Banco Transferencia': transactionDB['banco de transferencia']
-                }
+                    'Banco Bottak': transactionDB['banco bottak'],
+                    'Cuenta Bottak': transactionDB['cuenta bottak']                }
+
         }
         : {};
 
@@ -182,12 +184,12 @@ function Home() {
             },
             'CUENTA RECEPTORA BOTTAK': transactionDB['divisa de envio'] === 'USDT'
                 ? {
-                    'Billetera Bottak': transactionDB['billetera bottak']
-
+                    'Billetera Bottak': transactionDB['billetera bottak'],
+                    'Red Bottak': transactionDB['red bottak']
                 }
                 : {
-                    'Banco Transferencia': transactionDB['banco de transferencia']
-                }
+                    'Banco Bottak': transactionDB['banco bottak'],
+                    'Cuenta Bottak': transactionDB['cuenta bottak']                }
 
         }
         : {}
@@ -251,142 +253,6 @@ function Home() {
                                 }
                             </tbody>)
                             }
-                            {/* <tbody>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900 ">
-                                        Remitente
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB.remitente && transactionDB.remitente}
-                                    </td>
-                                </tr>
-                                    // 'DATOS DE DESTINATARIO': {
-            //     Nombre: transactionDB['destinatario'],
-            //     Dni: transactionDB['dni'],
-            //     Pais: transactionDB['pais'],
-            //     Direccion: transactionDB['direccion'],
-            //     Celular: transactionDB['celular'],
-            //     'Cuenta Destinatario': transactionDB['cuenta destinatario'],
-            //     'Nombre Banco': transactionDB['nombre de banco'],
-            //     'Divisa Receptor': transactionDB['divisa de receptor'],
-            //     'ID de tracking': transactionDB.uuid
-
-            // },
-                            <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        DNI remitente
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB['dni remitente'] && transactionDB['dni remitente']}
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Pais remitente
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB['pais remitente'] && transactionDB['pais remitente']}
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Destinatario
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB.destinatario && transactionDB.destinatario}
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        DNI destinatario
-                                    </td>
-                                    <td className="px-2 py-2  text-gray-900 ">
-                                        {transactionDB.dni && transactionDB.dni}
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Pais destinatario
-                                    </td>
-                                    <td className="px-2 py-2  text-gray-900 ">
-                                        {transactionDB.pais && transactionDB.pais}
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Celular de destinatario
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB.celular && transactionDB.celular}
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Cuenta de destinatario:
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB['cuenta destinatario'] && transactionDB['cuenta destinatario']}
-                                    </td>
-                                </tr>
-
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Importe mas comision:
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB.importe && transactionDB.importe} {transactionDB['divisa de envio'] && (transactionDB['divisa de envio'] === 'USD' ? 'USDT' : transactionDB['divisa de envio'])}
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Comision:
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB.comision} {transactionDB['divisa de envio'] && (transactionDB['divisa de envio'] === 'USD' ? 'USDT' : transactionDB['divisa de envio'])}
-                                    </td>
-                                </tr>
-
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Importe mas comision con el cambio aplicado:
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB.cambio && transactionDB.cambio} {transactionDB['divisa de receptor'] && (transactionDB['divisa de receptor'] === 'USD' ? 'USDT' : transactionDB['divisa de receptor'])}
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Fecha:
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB.fecha && transactionDB.fecha}
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Estado:
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        <span className={`w-full block  px-2 rounded-[10px] ${transactionDB.estado == 'En verificación' && 'bg-gray-100'}   ${transactionDB.estado == 'Transfiriendo' && 'bg-yellow-300'}   ${transactionDB.estado == 'Exitoso' && 'bg-green-400'} ${transactionDB.estado == 'Rechazado' && 'bg-red-400'}`}>{transactionDB.estado}</span>
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900  ">
-                                        Operacion:
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB.operacion && transactionDB.operacion}
-                                    </td>
-                                </tr>
-                                <tr className="bg-white text-[14px] border-b hover:bg-gray-50 " >
-                                    <td className="px-3 py-3 flex flex-col bg-[#00000020] font-bold text-[14px] text-gray-900 ">
-                                        ID de tracking:
-                                    </td>
-                                    <td className="px-3 py-3 text-gray-900 ">
-                                        {transactionDB.uuid}
-                                    </td>
-                                </tr> 
-                            </tbody> */}
                         </table>
                     }
                     {transactionDB.operacion === 'Cambio'
